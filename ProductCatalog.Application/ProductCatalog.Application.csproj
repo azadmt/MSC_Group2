@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Framework.Application\Framework.Application.csproj" />
+    <ProjectReference Include="..\ProductCatalog.DomainContract\ProductCatalog.DomainContract.csproj" />
+    <ProjectReference Include="..\ProductCatalog.Domain\ProductCatalog.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
