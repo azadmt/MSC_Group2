@@ -1,5 +1,6 @@
 ﻿using Framework.Domain;
 using ProductCatalog.DomainContract;
+using ProductCatalog.DomainContract.Event.Product;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ProductCatalog.Domain.Product
 {
-    public class ProductAggregate: Entity<Guid>
+    public class ProductAggregate: AggregateRoot<Guid>
     {
         private ProductAggregate()
         {
@@ -64,6 +65,16 @@ namespace ProductCatalog.Domain.Product
             Price = price;
             Code = code;
             CountryCode = countryCode;
+            AddChanges(new ProductCreatedEvent(
+                Id,
+                Name,
+                Code.Value,
+                CountryCode.Value,
+                Price.Value,
+                Color.Red,
+                Color.Blue,
+                Color.Green
+                ));
         }
 
         public string Name { get; private set; }

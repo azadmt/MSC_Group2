@@ -13,7 +13,9 @@ namespace Framework.Application
 
         public void Send<TCommand>(TCommand command) where TCommand : ICommand
         {
-            var commandHandler=serviceProvider.GetService<ICommandHandler<TCommand>>();
+           
+            var commandHandler = new CommandHandlerLoggerDecorator<TCommand>(serviceProvider.GetService<ICommandHandler<TCommand>>());
+
             commandHandler.Handle(command);
         }
     }

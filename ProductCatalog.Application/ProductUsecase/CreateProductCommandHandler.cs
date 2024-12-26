@@ -1,6 +1,8 @@
 ﻿using Framework.Application;
+using MassTransit;
 using ProductCatalog.Domain.Product;
 using ProductCatalog.DomainContract;
+using ProductCatalog.DomainContract.Event.Product;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +14,11 @@ namespace ProductCatalog.Application.ProductUsecase
     public class CreateProductCommandHandler : ICommandHandler<CreateProductCommand>
     {
         IProductRepository productRepository;
-
-        public CreateProductCommandHandler(IProductRepository productRepository)
+        IBusControl busControl;
+        public CreateProductCommandHandler(IProductRepository productRepository, IBusControl busControl)
         {
             this.productRepository = productRepository;
+            this.busControl = busControl;
         }
 
         public void Handle(CreateProductCommand command)
@@ -26,7 +29,13 @@ namespace ProductCatalog.Application.ProductUsecase
                command,
                 sequence
                 );
+         
             productRepository.Save(product);
+
+            foreach (var domainEvent in product.GetChanges())
+            {
+                busControl.Publish(domainEvent as ProductCreatedEvent).GetAwaiter().GetResult();
+            } 
         }
     }
 }
