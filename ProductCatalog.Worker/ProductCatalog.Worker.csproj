@@ -15,5 +15,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ProductCatalog.DomainContract\ProductCatalog.DomainContract.csproj" />
+    <ProjectReference Include="..\ProductCatalog.Query.DAL\ProductCatalog.Query.DAL.csproj" />
   </ItemGroup>
 </Project>

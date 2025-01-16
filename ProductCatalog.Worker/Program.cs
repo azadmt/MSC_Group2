@@ -1,11 +1,16 @@
 using MassTransit;
+using Microsoft.EntityFrameworkCore;
+using ProductCatalog.Query.DAL;
 using ProductCatalog.Worker;
 using ProductCatalog.Worker.EventHandler;
 
 IHost host = Host.CreateDefaultBuilder(args)
-    .ConfigureServices(services =>
+    .ConfigureServices((hostContext, services) =>
     {
-
+     
+        services
+            .AddDbContext<QueryDbContext>(opt =>
+        opt.UseSqlServer(hostContext.Configuration.GetConnectionString("default")));
         services.AddMassTransit(x =>
         {
             x.AddConsumer<ProductCreatedEventHandler>();
