@@ -34,7 +34,7 @@ namespace ProductCatalog.Application.ProductUsecase
 
             foreach (var domainEvent in product.GetChanges())
             {
-                busControl.Publish(domainEvent as ProductCreatedEvent).GetAwaiter().GetResult();
+              //  busControl.Publish(domainEvent as ProductCreatedEvent).GetAwaiter().GetResult();
             } 
         }
     }

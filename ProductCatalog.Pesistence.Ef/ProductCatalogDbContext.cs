@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Framework.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace ProductCatalog.Pesistence.Ef
 {
@@ -11,6 +12,7 @@ namespace ProductCatalog.Pesistence.Ef
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+           optionsBuilder.AddInterceptors(new TransactionalOutboxInterceptor());
             base.OnConfiguring(optionsBuilder);
 
         }

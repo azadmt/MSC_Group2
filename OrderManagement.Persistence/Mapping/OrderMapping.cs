@@ -25,6 +25,7 @@ namespace OrderManagement.Persistence.Mapping
                 b.OwnsOne(x => x.Quantity);
                 b.OwnsOne(x => x.UnitPrice);
             });
+
             builder
                 .Metadata
                 .FindNavigation(nameof(OrderAggregate.OrderItems))

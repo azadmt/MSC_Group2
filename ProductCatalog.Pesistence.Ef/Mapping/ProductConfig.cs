@@ -15,6 +15,7 @@ namespace ProductCatalog.Pesistence.Ef.Mapping
             builder.OwnsOne<ProductCode>(x => x.Code);
             builder.OwnsOne<CountryCode>(x => x.CountryCode);
             builder.Property(x => x.Name).HasMaxLength(50);
+            builder.Property(x => x.RowVersion).IsRowVersion().IsConcurrencyToken();
 
         }
     }

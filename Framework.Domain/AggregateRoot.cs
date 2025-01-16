@@ -4,6 +4,8 @@ namespace Framework.Domain
 {
     public abstract class AggregateRoot<TId> : Entity<TId>, IAggregateRoot
     {
+
+        public Byte[]  RowVersion{ get; set; }
         protected AggregateRoot()
         { }
 
