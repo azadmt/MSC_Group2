@@ -1,4 +1,4 @@
-﻿//using MassTransit;
+﻿using MassTransit;
 using Newtonsoft.Json;
 using System.Data;
 using System.Reflection;
@@ -8,12 +8,12 @@ namespace Framework.OutboxPublisher
     public class OutboxManager
     {
         private readonly IDbConnection _dbConnection;
-       // private readonly IBusControl _eventBus;
+       private readonly IBusControl _eventBus;
 
-        public OutboxManager(IDbConnection dbConnectionm/*, IBusControl eventBus*/)
+        public OutboxManager(IDbConnection dbConnectionm, IBusControl eventBus)
         {
             _dbConnection = dbConnectionm;
-         //   _eventBus = eventBus;
+         _eventBus = eventBus;
         }
 
         public void Start(Assembly[] eventAssemblies)
@@ -23,7 +23,7 @@ namespace Framework.OutboxPublisher
             {
                 foreach (var item in notSyncedOutbox)
                 {
-                   // _eventBus.Publish(ToEvent(item));
+                   _eventBus.Publish(ToEvent(item));
                     Console.WriteLine($"Publish Outbox :{item.EventBody}");
                 }
                 _dbConnection.UpdatePublishedDate(notSyncedOutbox.Select(x => x.Id));

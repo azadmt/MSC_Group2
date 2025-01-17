@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Framework.OutboxPublisher\Framework.OutboxPublisher.csproj" />
     <ProjectReference Include="..\ProductCatalog.DomainContract\ProductCatalog.DomainContract.csproj" />
   </ItemGroup>
 </Project>

@@ -2,6 +2,7 @@
 using ProductCatalog.DomainContract.Event.Product;
 using System.Reflection;
 using System.Timers;
+using Framework.OutboxPublisher;
 
 namespace ProductCatalog.OutboxPublisher
 {
@@ -9,11 +10,11 @@ namespace ProductCatalog.OutboxPublisher
     {
         private readonly ILogger<Worker> _logger;
 
-       // OutboxManager _outboxManager;
-        public Worker(ILogger<Worker> logger/*, OutboxManager outboxManager*/)
+        OutboxManager _outboxManager;
+        public Worker(ILogger<Worker> logger, OutboxManager outboxManager)
         {
             _logger = logger;
-          //  _outboxManager = outboxManager;
+           _outboxManager = outboxManager;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -29,7 +30,7 @@ namespace ProductCatalog.OutboxPublisher
         private void CheckOutBox(object? sender, ElapsedEventArgs e)
         {
             var contractAssembies = new Assembly[] { typeof(ProductCreatedEvent).Assembly };
-          //  _outboxManager.Start(contractAssembies);
+           _outboxManager.Start(contractAssembies);
         }
     }
 }

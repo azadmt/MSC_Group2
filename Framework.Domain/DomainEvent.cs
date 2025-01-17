@@ -1,4 +1,6 @@
-﻿namespace Framework.Domain
+﻿using System.Text.Json.Serialization;
+
+namespace Framework.Domain
 {
     public abstract class DomainEvent : IEvent
     {
@@ -8,7 +10,9 @@
             CreationDate = DateTime.Now;
         }
 
+        [JsonInclude] 
         public Guid Id { get; private set; }
+        [JsonInclude]
         public DateTime CreationDate { get; private set; }
     }
 }

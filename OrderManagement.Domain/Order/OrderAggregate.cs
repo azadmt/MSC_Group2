@@ -36,6 +36,9 @@ namespace OrderManagement.Domain.Order
             return ag;
         }
         public int OrderNumber { get; private set; }
+        
+        public decimal Total { get; private set; }
+
         public Guid CustomerId { get; private set; }
         public DateTime OrderDate { get; private set; }
         public OrderState State { get; private set; }

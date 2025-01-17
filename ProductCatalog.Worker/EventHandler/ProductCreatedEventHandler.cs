@@ -21,7 +21,12 @@ namespace ProductCatalog.Worker.EventHandler
 
         public async  Task Consume(ConsumeContext<ProductCreatedEvent> context)
         {
+            
             var pEvent = context.Message;
+            //move to infrastructure
+            if (IsHandled(pEvent.Id))
+                return;
+            
             var product = new Product
             {
                 Id = pEvent.ProductId,
@@ -37,6 +42,12 @@ namespace ProductCatalog.Worker.EventHandler
 
             await dbContext.Products.AddAsync(product);
             await dbContext.SaveChangesAsync();
+        }
+
+        private bool IsHandled(Guid eventId)
+        {
+            // throw new NotImplementedException();
+            return false;
         }
     }
 }

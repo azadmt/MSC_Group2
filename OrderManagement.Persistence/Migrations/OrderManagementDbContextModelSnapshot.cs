@@ -40,6 +40,9 @@ namespace OrderManagement.Persistence.Migrations
                     b.Property<int>("State")
                         .HasColumnType("int");
 
+                    b.Property<decimal>("Total")
+                        .HasColumnType("decimal(18,2)");
+
                     b.HasKey("Id");
 
                     b.ToTable("OrderAggregate");

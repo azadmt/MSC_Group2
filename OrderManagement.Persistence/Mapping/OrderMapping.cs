@@ -17,6 +17,7 @@ namespace OrderManagement.Persistence.Mapping
             builder.Property(x => x.CustomerId);
             builder.Property(x => x.OrderDate);
             builder.Property(x => x.OrderNumber);
+            builder.Property(x => x.Total);
 
             builder.OwnsMany(x => x.OrderItems, b =>
             {

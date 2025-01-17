@@ -1,4 +1,4 @@
-//using Framework.OutboxPublisher;
+using Framework.OutboxPublisher;
 using MassTransit;
 using System.Data;
 using System.Data.SqlClient;
@@ -13,9 +13,9 @@ namespace ProductCatalog.OutboxPublisher
                 .ConfigureServices((hostContext, services) =>
                 {
 
-                 //   services.AddSingleton<IDbConnection>(new SqlConnection(hostContext.Configuration.GetConnectionString("default")));
+                  services.AddSingleton<IDbConnection>(new SqlConnection(hostContext.Configuration.GetConnectionString("default")));
                     //services.AddSingleton<IEventBus, MassTransitBusImplementation>();
-                  //  services.AddSingleton<OutboxManager>();
+                   services.AddSingleton<OutboxManager>();
 
                     services.AddMassTransit(x =>
                     {

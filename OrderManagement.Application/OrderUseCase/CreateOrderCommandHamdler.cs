@@ -22,7 +22,10 @@ namespace OrderManagement.Application.OrderUseCase
         {
             var orderNo = new Random().Next(0, 100);
             var order=OrderAggregate.Create(command, orderNo);
+            
+            
             orderRepository.Save(order);
+            //Adjust inventory
         }
     }
 }
