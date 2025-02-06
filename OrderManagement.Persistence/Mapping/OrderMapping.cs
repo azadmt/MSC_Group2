@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using OrderManagement.Domain.Order;
+using OrderManagement.Domain.Order.State;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,12 @@ namespace OrderManagement.Persistence.Mapping
             builder.Property(x => x.OrderDate);
             builder.Property(x => x.OrderNumber);
             builder.Property(x => x.Total);
+            builder.Property(x => x.RowVersion).IsRowVersion().IsConcurrencyToken();
+            builder.Property(x => x.State)
+                .HasConversion(
+                p=> p.GetType().Name,
+                p=> GetOrderState(p)
+                );
 
             builder.OwnsMany(x => x.OrderItems, b =>
             {
@@ -31,6 +38,17 @@ namespace OrderManagement.Persistence.Mapping
                 .Metadata
                 .FindNavigation(nameof(OrderAggregate.OrderItems))
                 .SetPropertyAccessMode(PropertyAccessMode.Field);
+        }
+        public OrderState GetOrderState(string state)
+        {
+            return state switch
+            {
+                nameof(PendingState) => new PendingState(),
+                nameof(CancledState) => new CancledState(),
+                nameof(ApprovedState) => new ApprovedState(),
+                nameof(DeliveredState) => new DeliveredState(),
+                _ => throw new NotImplementedException(),
+            };
         }
     }
 }

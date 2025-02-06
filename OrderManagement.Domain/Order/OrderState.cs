@@ -1,11 +1,12 @@
 ﻿namespace OrderManagement.Domain.Order
 {
-    public enum OrderState
-    {
-        Approved,
-        Delivered,
-        Paid,
-        Shiped,
-        Canceled
-    }
+    //public enum OrderState
+    //{
+    //    Pending,
+    //    Approved,
+    //    Delivered,
+    //    Paid,
+    //    Shiped,
+    //    Canceled
+    //}
 }

@@ -12,8 +12,8 @@ using OrderManagement.Persistence;
 namespace OrderManagement.Persistence.Migrations
 {
     [DbContext(typeof(OrderManagementDbContext))]
-    [Migration("20241227092453_change_collectionType")]
-    partial class change_collectionType
+    [Migration("20250206104245_add-init")]
+    partial class addinit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -39,8 +39,18 @@ namespace OrderManagement.Persistence.Migrations
                     b.Property<int>("OrderNumber")
                         .HasColumnType("int");
 
-                    b.Property<int>("State")
-                        .HasColumnType("int");
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Total")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 

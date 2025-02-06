@@ -59,13 +59,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderManagement.Domain.Cont
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.Persistence", "Framework.Persistence\Framework.Persistence.csproj", "{29573077-6713-43FE-9B97-D1379C1C227A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.OutboxPublisher", "Framework.OutboxPublisher\Framework.OutboxPublisher.csproj", "{906BEB02-01E2-4618-8125-6CB83E9BF5EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.OutboxPublisher", "Framework.OutboxPublisher\Framework.OutboxPublisher.csproj", "{906BEB02-01E2-4618-8125-6CB83E9BF5EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductCatalog.OutboxPublisher", "ProductCatalog.OutboxPublisher\ProductCatalog.OutboxPublisher.csproj", "{276053E2-D380-4E63-82AC-895B3FA5CD3D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryManagement", "InventoryManagement\InventoryManagement.csproj", "{22F0E501-B52F-47CE-9059-0F3302A50255}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryManagement.Api", "InventoryManagement.Api\InventoryManagement.Api.csproj", "{488F9DF9-E2D3-4558-840C-925D4B123509}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProductCatalog.OutboxPublisher", "ProductCatalog.OutboxPublisher\ProductCatalog.OutboxPublisher.csproj", "{276053E2-D380-4E63-82AC-895B3FA5CD3D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -145,14 +141,6 @@ Global
 		{276053E2-D380-4E63-82AC-895B3FA5CD3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{276053E2-D380-4E63-82AC-895B3FA5CD3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{276053E2-D380-4E63-82AC-895B3FA5CD3D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{22F0E501-B52F-47CE-9059-0F3302A50255}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{22F0E501-B52F-47CE-9059-0F3302A50255}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{22F0E501-B52F-47CE-9059-0F3302A50255}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{22F0E501-B52F-47CE-9059-0F3302A50255}.Release|Any CPU.Build.0 = Release|Any CPU
-		{488F9DF9-E2D3-4558-840C-925D4B123509}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{488F9DF9-E2D3-4558-840C-925D4B123509}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{488F9DF9-E2D3-4558-840C-925D4B123509}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{488F9DF9-E2D3-4558-840C-925D4B123509}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

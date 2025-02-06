@@ -60,14 +60,14 @@ namespace ProductCatalog.Domain.Product
         public ProductAggregate(Guid id, string name, Color color, Money price, ProductCode code, CountryCode countryCode)
         {
             Id = id;
-            Name = name;
+            Name =int.Parse( name);
             Color = color;
             Price = price;
             Code = code;
             CountryCode = countryCode;
             AddChanges(new ProductCreatedEvent(
                 Id,
-                Name,
+                Name.ToString(),
                 Code.Value,
                 CountryCode.Value,
                 Price.Value,
@@ -77,7 +77,7 @@ namespace ProductCatalog.Domain.Product
                 ));
         }
 
-        public string Name { get; private set; }
+        public int Name { get; private set; }
         public Color Color { get; private set; }
         public Money Price{ get; private set; }
         public ProductCode Code { get; private set; }

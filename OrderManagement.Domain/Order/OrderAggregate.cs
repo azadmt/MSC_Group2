@@ -1,5 +1,6 @@
 ﻿using Framework.Domain;
 using OrderManagement.Domain.Contract;
+using OrderManagement.Domain.Order.State;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -20,8 +21,8 @@ namespace OrderManagement.Domain.Order
             ag.OrderDate = DateTime.Now;
             ag.OrderNumber = ordernumber;
             ag.CustomerId = createOrderCommand.CustomerId;
-
-            if(!createOrderCommand.OrderItems.Any())
+            ag.State = new PendingState();
+            if (!createOrderCommand.OrderItems.Any())
             {
                 throw new CanNotCreateOrderWithoutOrderItemsException();
             }
@@ -32,11 +33,11 @@ namespace OrderManagement.Domain.Order
                     new Quantity(item.Quantity),
                     new Money(item.UnitPrice)));
             }
-            
+
             return ag;
         }
         public int OrderNumber { get; private set; }
-        
+
         public decimal Total { get; private set; }
 
         public Guid CustomerId { get; private set; }
@@ -45,5 +46,30 @@ namespace OrderManagement.Domain.Order
 
         protected List<OrderItem> _orderItems = new();
         public IEnumerable<OrderItem> OrderItems => _orderItems.AsReadOnly();
+
+
+        public void Approve()
+        {
+            //if (State != OrderState.New)
+            //    throw new InvalidOperationException();
+
+            State = new ApprovedState();
+
+        }
+
+
+        public void Cancle()
+        {
+            //if (State != OrderState.Approved || State != OrderState.New)
+            //    throw new InvalidOperationException();
+
+            State = new CancledState()  ;
+        }
+
+        public void Deliver()
+        {
+            State = new DeliveredState();
+
+        }
     }
 }
