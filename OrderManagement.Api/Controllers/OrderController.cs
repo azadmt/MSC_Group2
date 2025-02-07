@@ -18,10 +18,17 @@ namespace OrderManagement.Api.Controllers
             this.commandBus = commandBus;
         }
 
-        [HttpPost]
-        public IActionResult Post(CreateOrderCommand createOrderCommand)
+        [HttpPost(nameof(CreateOrder))]
+        public IActionResult CreateOrder(CreateOrderCommand createOrderCommand)
         {
             commandBus.Send(createOrderCommand);
+            return Ok();
+        }
+
+        [HttpPost(nameof(ApproveOrder))]
+        public IActionResult ApproveOrder(ApproveOrderCommand command)
+        {
+            commandBus.Send(command);
             return Ok();
         }
     }

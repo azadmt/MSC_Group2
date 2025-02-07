@@ -1,5 +1,6 @@
 ﻿using Framework.Domain;
 using OrderManagement.Domain.Contract;
+using OrderManagement.Domain.Contract.Event;
 using OrderManagement.Domain.Order.State;
 using System;
 using System.Collections.Generic;
@@ -33,7 +34,11 @@ namespace OrderManagement.Domain.Order
                     new Quantity(item.Quantity),
                     new Money(item.UnitPrice)));
             }
-
+            ag.AddChanges(new OrderCreatedEvent(ag.Id,
+                ag.OrderDate,
+                ag.OrderItems
+                .Select(x => new OrderItemDto() { ProductId = x.ProductId, Quantity = x.Quantity, UnitPrice = x.UnitPrice.Value })
+                .ToList()));
             return ag;
         }
         public int OrderNumber { get; private set; }
@@ -54,6 +59,7 @@ namespace OrderManagement.Domain.Order
             //    throw new InvalidOperationException();
 
             State = new ApprovedState();
+            AddChanges(new OrderApprovedEvent { OrderId = Id });
 
         }
 
@@ -63,7 +69,7 @@ namespace OrderManagement.Domain.Order
             //if (State != OrderState.Approved || State != OrderState.New)
             //    throw new InvalidOperationException();
 
-            State = new CancledState()  ;
+            State = new CancledState();
         }
 
         public void Deliver()

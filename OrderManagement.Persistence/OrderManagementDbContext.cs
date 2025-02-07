@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Framework.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace OrderManagement.Persistence
 {
@@ -11,6 +12,7 @@ namespace OrderManagement.Persistence
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            optionsBuilder.AddInterceptors(new TransactionalOutboxInterceptor());
             base.OnConfiguring(optionsBuilder);
 
         }

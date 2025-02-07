@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 
 namespace OrderManagement.Application.OrderUseCase
 {
-    public class CreateOrderCommandHamdler : ICommandHandler<CreateOrderCommand>
+    public class CreateOrderCommandHamdler :
+        ICommandHandler<CreateOrderCommand>
     {
         IOrderRepository orderRepository;
 
@@ -26,6 +27,11 @@ namespace OrderManagement.Application.OrderUseCase
             
             orderRepository.Save(order);
             //Adjust inventory
+        }
+
+        public void Handle(ApproveOrderCommand command)
+        {
+            throw new NotImplementedException();
         }
     }
 }
