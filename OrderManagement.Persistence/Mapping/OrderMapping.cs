@@ -47,7 +47,7 @@ namespace OrderManagement.Persistence.Mapping
                 nameof(CancledState) => new CancledState(),
                 nameof(ApprovedState) => new ApprovedState(),
                 nameof(DeliveredState) => new DeliveredState(),
-                _ => throw new NotImplementedException(),
+                _ => new PendingState(),
             };
         }
     }

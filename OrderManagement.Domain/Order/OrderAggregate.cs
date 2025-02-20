@@ -58,7 +58,7 @@ namespace OrderManagement.Domain.Order
             //if (State != OrderState.New)
             //    throw new InvalidOperationException();
 
-            State = new ApprovedState();
+            State = State.Approved();
             AddChanges(new OrderApprovedEvent { OrderId = Id });
 
         }
@@ -69,7 +69,7 @@ namespace OrderManagement.Domain.Order
             //if (State != OrderState.Approved || State != OrderState.New)
             //    throw new InvalidOperationException();
 
-            State = new CancledState();
+            State = State.Canceled();
         }
 
         public void Deliver()
