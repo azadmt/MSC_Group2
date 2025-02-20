@@ -1,7 +1,6 @@
 using Framework.Application;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
-using ProductCatalog.Application;
 using ProductCatalog.Application.ProductUsecase;
 using ProductCatalog.Domain.Product;
 using ProductCatalog.DomainContract;
@@ -51,7 +50,13 @@ builder.Services.AddMassTransit(x =>
     });
 });
 
+builder.Services
+.AddHealthChecks()
+.AddSqlServer(builder.Configuration.GetConnectionString("default"))
+.AddRabbitMQ(new Uri("amqp://guest:guest@localhost:5672"))
+;
 
+//builder.Services.AddHealthChecksUI();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -61,8 +66,20 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseAuthorization();
 
+app.UseAuthorization();
+app.UseHealthChecks("/hc");
+//app.UseHealthChecksUI(options => options.UIPath = "/hc-ui");
 app.MapControllers();
+//app.MapHealthChecks("/hc");
+//app.MapHealthChecks("/hc-d", new HealthCheckOptions
+//{
+//    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+//});
+
+//app.UseEndpoints(endpoints =>
+//{
+//  //  endpoints.MapHealthChecksUI();
+//});
 
 app.Run();
